@@ -5,7 +5,3 @@ export class miniVue {
     this.data = data;
   }
 }
-
-export const effect = () => {}
-
-export const reactive = () => {}
