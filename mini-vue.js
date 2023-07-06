@@ -59,6 +59,17 @@ export class miniVue {
         })
       }
     }
+    // finish simple bind logic for input
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const attributes = node.attributes;
+      for (let attribute of attributes) {
+        if (attribute.name === 'v-model') {
+          const bindName = attribute.value
+          effect(() => node.value === this.data[bindName])
+          node.addEventListener('input', e => this.data[bindName] = node.value)
+        }
+      }
+    }
     if (node.childNodes && node.childNodes.length) {
       for (let childNode of node.childNodes) {
         this.traverser(childNode)
